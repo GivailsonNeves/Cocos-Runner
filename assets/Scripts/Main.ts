@@ -80,6 +80,7 @@ export default class Main extends cc.Component {
             Main.totalTickets = Main.currentTickets;
         }
         if (Main.totalTickets >= 20) {
+            cc.director.pause();
             Main.finishied = true;
             GameScene.showFeedback('Parabéns você capturou todos os vinte cupons!');
             Main.registerTickets(this.totalTickets);
