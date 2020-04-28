@@ -1,0 +1,9 @@
+{
+  "engine": "cocos-creator-js",
+  "packages": "packages",
+  "name": "Runner",
+  "uuid": "3e14c914-ccf0-4734-a99d-25a900bd021c",
+  "version": "2.3.3",
+  "id": "c4f588b1-65ba-4961-a7a2-fb9c24db3da4",
+  "isNew": false
+}

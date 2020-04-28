@@ -1,0 +1,37 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "floating2",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 2,
+  "sample": 60,
+  "speed": 0.3,
+  "wrapMode": 2,
+  "curveData": {
+    "props": {
+      "anchorY": [
+        {
+          "frame": 0,
+          "value": 0.5
+        },
+        {
+          "frame": 0.5,
+          "value": 0.55
+        },
+        {
+          "frame": 0.9666666666666667,
+          "value": 0.5
+        },
+        {
+          "frame": 1.5,
+          "value": 0.55
+        },
+        {
+          "frame": 2,
+          "value": 0.5
+        }
+      ]
+    }
+  },
+  "events": []
+}
