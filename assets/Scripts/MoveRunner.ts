@@ -1,4 +1,5 @@
 import Main from './Main';
+import GameScene from './GameScene';
 
 const {ccclass, property} = cc._decorator;
 
@@ -14,7 +15,8 @@ export default class NewClass extends cc.Component {
     onLoad () {
         this.initialY = this.node.position.y;
         this.node.getComponent(cc.Animation).play("running");
-        cc.systemEvent.on(cc.SystemEvent.EventType.KEY_UP,this.jumpPlayer,this);
+        cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN,this.handleKeyBoard,this);
+        GameScene.handlers.push(() => this.jumpPlayer());
         cc.director.getPhysicsManager().enabled = true;
         this.node.getComponent(cc.RigidBody).fixedRotation  = true;
     }
@@ -23,25 +25,31 @@ export default class NewClass extends cc.Component {
         this.alredyFallDown = false;
     }
 
-    jumpPlayer (event) {
+    handleKeyBoard(event) {
         switch(event.keyCode){
             case cc.macro.KEY.space:
-                if(this.jump == 0 && !this.alredyFallDown){
-                    this.node.getComponent(cc.Animation).play("jumpping");
-                    this.nextPosition = this.node.position.y + 50;
-                    this.node.getComponent(cc.RigidBody).applyForceToCenter(new cc.Vec2(0,100000),true);
-                    this.jump = 1;                    
-                }
+            case cc.macro.KEY.up:
+                this.jumpPlayer();
             break;
         }
     }
+
+    jumpPlayer () {
+        if(this.jump == 0 && !this.alredyFallDown){
+            this.node.getComponent(cc.Animation).play("jumpping");
+            this.nextPosition = this.node.position.y + 50;
+            this.node.getComponent(cc.RigidBody).applyForceToCenter(new cc.Vec2(0,100000),true);
+            this.jump = 1;                    
+        }
+    }
+
+    
 
     onBeginContact(contact,self,other){        
         if(other && other.node.name == "ground"){            
             this.jump = 0;
         } else {
             if(other.node) {
-                console.log(other.name);
                 switch(other.name) {
                     case 'ticket<PhysicsBoxCollider>':
                         if (other.node.opacity) {
@@ -51,6 +59,7 @@ export default class NewClass extends cc.Component {
                     break;
                     case 'yellow_lollipop<PhysicsBoxCollider>':
                     case 'red_lollipop<PhysicsBoxCollider>':
+                        other.node.opacity = 0;
                         Main.onColide();
                     break;
                 }

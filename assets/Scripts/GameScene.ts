@@ -21,6 +21,7 @@ export default class GameScene extends cc.Component {
     @property(cc.Node) bgModal : cc.Node = null;
 
     static _ref : GameScene;
+    public static handlers : any[] = [];
 
     constructor() {
         super();
@@ -50,7 +51,9 @@ export default class GameScene extends cc.Component {
         GameScene.hideFeedback();
         cc.director.getPhysicsManager().enabled = true;        
         this.node.on("mousedown",(event) => {
-            Main.restartGame();            
+            for (let handler of GameScene.handlers) {
+                handler();
+            }
          },this);
     }
 

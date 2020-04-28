@@ -52,26 +52,25 @@ export default class Main extends cc.Component {
     }
 
     public static onFallDown() {
+        Main.colides = 3;
         Main.cracheIt();
     }
 
     public static onColide() {
+        Main.colides++;
         Main.cracheIt();
     }
 
     private static cracheIt() {
         Main.crached = true;
-        Main.colides++;
         Main.finishied = Main.colides >= 3;
         if (Main.finishied) {
             GameScene.showFeedback('Que pena, não foi dessa vez!!');
-        } else {
-            GameScene.showFeedback('Uhhh!!!! Tente novamente!');
+            cc.director.pause();
         }
         if (this.currentTickets >= this.totalTickets) {
             Main.registerTickets(this.currentTickets);
         }
-        cc.director.pause();
     }
 
     public static onNewTicket() {
