@@ -24,11 +24,15 @@ export default class Obstacle extends cc.Component {
         for(let obstacle of this.childrens) {
             obstacle.opacity = 0;            
         }
-        this.node.opacity = 255;
         this.node.getComponent(cc.RigidBody).enabledContactListener = true;
-        const index = Math.round(Math.random() * (this.childrens.length -1));        
-        this.childrens[index].opacity = 255;        
-        this.node.name = this.childrens[index].name;
+        const index = Math.round(Math.random() * (this.childrens.length));
+        if (index != this.childrens.length) {
+            this.node.opacity = 255;
+            this.childrens[index].opacity = 255;        
+            this.node.name = this.childrens[index].name;
+        } else {
+            this.node.opacity = 0;
+        }
     }
 
     update (dt) {

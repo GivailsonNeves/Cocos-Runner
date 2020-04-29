@@ -52,15 +52,17 @@ export default class NewClass extends cc.Component {
             if(other.node) {
                 switch(other.name) {
                     case 'ticket<PhysicsBoxCollider>':
-                        if (other.node.opacity) {
+                        if (other.node.opacity !== 0) {
                             other.node.opacity = 0;
                             Main.onNewTicket();
                         }
                     break;
                     case 'yellow_lollipop<PhysicsBoxCollider>':
                     case 'red_lollipop<PhysicsBoxCollider>':
-                        other.node.opacity = 0;
-                        Main.onColide();
+                        if (other.node.opacity !== 0) {
+                            other.node.opacity = 0;
+                            Main.onColide();
+                        }
                     break;
                 }
             }          

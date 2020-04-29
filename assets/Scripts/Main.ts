@@ -12,9 +12,10 @@ export default class Main extends cc.Component {
     private static finishied: boolean = false;
     private static crached: boolean = false;
     static totalTickets: number = 0;
+    static record: number = 0;
     static currentTickets: number = 0;
     static currentPlayer: string = 'boy';
-    private static colides: number = 0;
+    public static colides: number = 0;
     private static ticketsUrl: string;
     private static token: string;
     
@@ -30,6 +31,7 @@ export default class Main extends cc.Component {
         Main.token = this.getParameterByName("token");        
         Main.currentPlayer = plr ? plr : 'boy';
         Main.totalTickets = tickets ? parseInt(tickets) : 0;
+        Main.record = tickets ? parseInt(tickets) : 0;
         Main.playGame();
     }
 
@@ -65,10 +67,10 @@ export default class Main extends cc.Component {
         Main.crached = true;
         Main.finishied = Main.colides >= 3;
         if (Main.finishied) {
-            GameScene.showFeedback('Que pena, não foi dessa vez!!');
-            cc.director.pause();
-        }
-        if (this.currentTickets >= this.totalTickets) {
+            GameScene.showFeedback('Fim de jogo.', true);
+            setTimeout(() => {
+                cc.director.pause();
+            }, 30);
             Main.registerTickets(this.currentTickets);
         }
     }
@@ -79,10 +81,12 @@ export default class Main extends cc.Component {
             Main.totalTickets = Main.currentTickets;
         }
         if (Main.totalTickets >= 20) {
-            cc.director.pause();
             Main.finishied = true;
-            GameScene.showFeedback('Parabéns você capturou todos os vinte cupons!');
+            GameScene.showFeedback('Parabéns! Você pegou todos os cupons.', true);
             Main.registerTickets(this.totalTickets);
+            setTimeout(() => {
+                cc.director.pause();
+            }, 30);
         }
     }
 
