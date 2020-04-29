@@ -13,7 +13,6 @@ const {ccclass, property} = cc._decorator;
 export default class NewClass extends cc.Component {
 
     @property(cc.Label) tfRecord : cc.Label = null;
-    @property(cc.Label) tfCupons : cc.Label = null;
     @property(cc.Label) tfLife : cc.Label = null;
 
     start () {
@@ -23,7 +22,6 @@ export default class NewClass extends cc.Component {
     update (dt) {
         this.tfLife.string = '' + (3 - Main.colides);
         this.tfRecord.string = this.minTwoDigits(Main.totalTickets);
-        this.tfCupons.string = this.minTwoDigits(Main.currentTickets);
     }
     private minTwoDigits(n:number): string {
         return n > 9 ? n.toString() : '0' + n;

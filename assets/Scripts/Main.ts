@@ -33,7 +33,7 @@ export default class Main extends cc.Component {
         Main.currentPlayer = plr ? plr : 'boy';
         Main.totalTickets = tickets ? parseInt(tickets) : 0;
         Main.record = tickets ? parseInt(tickets) : 0;
-        Main.playGame('O jogo iniciará em 4 segundos.');
+        Main.playGame('Prepare-se!');
     }
 
     private static playGame(message) {
@@ -45,14 +45,15 @@ export default class Main extends cc.Component {
                 GameScene.showFeedback("Erro ao inicializar jogo!");
             } else {
                 if (GameScene.isLandsCape()) {
-                    GameScene.showFeedback(message);
-                    setTimeout(() => {
-                        GameScene.hideFeedback();
-                        cc.director.resume();
-                    }, 4000);
+                    GameScene.showFeedback(message,false, true);
                 }
             }
         });
+    }
+
+    public static init() {
+        GameScene.hideFeedback();
+        cc.director.resume();
     }
 
     public static restartGame() {

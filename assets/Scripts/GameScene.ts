@@ -20,6 +20,7 @@ export default class GameScene extends cc.Component {
     @property(cc.Label) tfFeedback : cc.Label = null;
     @property(cc.Node) bgModal : cc.Node = null;
     @property(cc.Node) nPainel : cc.Node = null;
+    @property(cc.Button) btnInit : cc.Button = null;
     static _ref : GameScene;
 
     static isLocked : boolean = false;
@@ -29,10 +30,12 @@ export default class GameScene extends cc.Component {
         GameScene._ref = this;
     }
 
-    public static showFeedback(message: string, isFinal: boolean = false) {
+    public static showFeedback(message: string, isFinal: boolean = false, showInitButton: boolean = false) {
         GameScene._ref.tfFeedback.node.opacity = 255;
         GameScene._ref.tfFeedback.string = message;
         GameScene._ref.bgModal.opacity = 180;
+        if (showInitButton)
+            GameScene._ref.btnInit.node.opacity = 255;
         if (isFinal) {
             GameScene._ref.nPainel.opacity = 255;
         }        
@@ -42,6 +45,7 @@ export default class GameScene extends cc.Component {
         GameScene._ref.tfFeedback.node.opacity = 0;
         GameScene._ref.bgModal.opacity = 0;
         GameScene._ref.nPainel.opacity = 0;
+        GameScene._ref.btnInit.node.opacity = 0;
     }
 
     onLoad () {
@@ -66,6 +70,10 @@ export default class GameScene extends cc.Component {
                     Main.restartGame();
                     GameScene.isLocked = false;
                 }
+            }
+
+            if(GameScene._ref.btnInit.node.opacity) {
+                Main.init();
             }
          },this);
     }

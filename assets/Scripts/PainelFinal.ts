@@ -21,7 +21,7 @@ export default class NewClass extends cc.Component {
     update (dt) {
         this.tfPrevRecord.string = this.minTwoDigits(Main.totalTickets);
         this.tfCupons.string = this.minTwoDigits(Main.currentTickets);
-        this.tfRecord.string = this.minTwoDigits(Main.totalTickets);
+        this.tfRecord.string = Main.totalTickets <= Main.record ? '--' : this.minTwoDigits(Main.totalTickets);
         this.tfNewCupons.string = this.minTwoDigits(Main.totalTickets - Main.record);
     }
     private minTwoDigits(n:number): string {
