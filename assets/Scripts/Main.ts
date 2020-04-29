@@ -8,7 +8,7 @@ cc.loader.loadRes('ticket.png', cc.SpriteFrame);
 
 @ccclass
 export default class Main extends cc.Component {
-    
+
     private static finishied: boolean = false;
     private static crached: boolean = false;
     static totalTickets: number = 0;
@@ -18,38 +18,48 @@ export default class Main extends cc.Component {
     public static colides: number = 0;
     private static ticketsUrl: string;
     private static token: string;
-    
+    public static handlers : any[] = [];
+
     onLoad() {
         Main.ticketsUrl = window['TICKETS_URL'] ? window['TICKETS_URL'] : "https://aniversario-api-hml.azurewebsites.net/api/acao";
         this.getParameters();
-        cc.director.getPhysicsManager().enabled = true;        
+        cc.director.getPhysicsManager().enabled = true;
     }
 
     getParameters() {
         const plr = this.getParameterByName('player');
         const tickets = this.getParameterByName('tickets');
-        Main.token = this.getParameterByName("token");        
+        Main.token = this.getParameterByName("token");
         Main.currentPlayer = plr ? plr : 'boy';
         Main.totalTickets = tickets ? parseInt(tickets) : 0;
         Main.record = tickets ? parseInt(tickets) : 0;
-        Main.playGame();
+        Main.playGame('O jogo iniciará em 4 segundos.');
     }
 
-    private static playGame() {
+    private static playGame(message) {
         Main.currentTickets = 0;
-        cc.director.loadScene('GameScene', () => {            
-            if(!Main.token) {
+        cc.director.loadScene('GameScene', () => {
+            cc.director.pause();
+            if (!Main.token) {
                 Main.finishied = true;
-                cc.director.pause();
                 GameScene.showFeedback("Erro ao inicializar jogo!");
+            } else {
+                if (GameScene.isLandsCape()) {
+                    GameScene.showFeedback(message);
+                    setTimeout(() => {
+                        GameScene.hideFeedback();
+                        cc.director.resume();
+                    }, 4000);
+                }
             }
         });
     }
 
     public static restartGame() {
-        if (!Main.finishied && Main.crached) {
-            GameScene.hideFeedback();            
-            Main.playGame();
+        console.log('restarting')
+        if (!Main.finishied) {
+            GameScene.hideFeedback();
+            Main.playGame('O jogo re-iniciará em 4 segundos.');
         }
     }
 

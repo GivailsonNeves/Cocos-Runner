@@ -20,9 +20,9 @@ export default class GameScene extends cc.Component {
     @property(cc.Label) tfFeedback : cc.Label = null;
     @property(cc.Node) bgModal : cc.Node = null;
     @property(cc.Node) nPainel : cc.Node = null;
-
     static _ref : GameScene;
-    public static handlers : any[] = [];
+
+    static isLocked : boolean = false;
 
     constructor() {
         super();
@@ -54,10 +54,18 @@ export default class GameScene extends cc.Component {
         }
         cc.director.resume();
         GameScene.hideFeedback();
-        cc.director.getPhysicsManager().enabled = true;        
-        this.node.on("mousedown",(event) => {
-            for (let handler of GameScene.handlers) {
-                handler();
+        cc.director.getPhysicsManager().enabled = true;
+        this.node.on("touchstart",(event) => {
+            if( !cc.director.isPaused() ) {
+                for (let handler of Main.handlers) {
+                    if (handler)
+                        handler();
+                }
+            } else {
+                if (GameScene.isLocked) {
+                    Main.restartGame();
+                    GameScene.isLocked = false;
+                }
             }
          },this);
     }
@@ -70,5 +78,14 @@ export default class GameScene extends cc.Component {
 
     private minTwoDigits(n:number): string {
         return n > 9 ? n.toString() : '0' + n;
+    }
+
+    public static isLandsCape() {
+        if( cc.winSize.height > cc.winSize.width ) {
+            GameScene.showFeedback('Resolução \nnão permitida');
+            GameScene.isLocked = true;
+            return false;
+        }
+        return true;
     }
 }
