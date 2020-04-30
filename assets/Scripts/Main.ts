@@ -9,7 +9,7 @@ cc.loader.loadRes('ticket.png', cc.SpriteFrame);
 @ccclass
 export default class Main extends cc.Component {
 
-    private static finishied: boolean = false;
+    public static finishied: boolean = false;
     private static crached: boolean = false;
     static totalTickets: number = 0;
     static record: number = 0;
@@ -18,7 +18,7 @@ export default class Main extends cc.Component {
     public static colides: number = 0;
     private static ticketsUrl: string;
     private static token: string;
-    public static handlers : any[] = [];
+    public static handlers: any[] = [];
 
     onLoad() {
         Main.ticketsUrl = window['TICKETS_URL'] ? window['TICKETS_URL'] : "https://aniversario-api-hml.azurewebsites.net/api/acao";
@@ -45,7 +45,7 @@ export default class Main extends cc.Component {
                 GameScene.showFeedback("Erro ao inicializar jogo!");
             } else {
                 if (GameScene.isLandsCape()) {
-                    GameScene.showFeedback(message,false, true);
+                    GameScene.showFeedback(message, false, true);
                 }
             }
         });
@@ -57,10 +57,22 @@ export default class Main extends cc.Component {
     }
 
     public static restartGame() {
-        console.log('restarting')
         if (!Main.finishied) {
             GameScene.hideFeedback();
             Main.playGame('O jogo re-iniciará em 4 segundos.');
+        }
+    }
+
+    public static reInit() {
+        if (Main.finishied) {
+            setTimeout(() => {
+                Main.colides = 0;
+                Main.currentTickets = 0;
+                Main.finishied = false;
+                Main.record = Main.totalTickets > Main.record ? Main.totalTickets : Main.record;
+                GameScene.hideFeedback();
+                cc.director.loadScene('GameScene');
+            }, 30);
         }
     }
 
@@ -78,7 +90,7 @@ export default class Main extends cc.Component {
         Main.crached = true;
         Main.finishied = Main.colides >= 3;
         if (Main.finishied) {
-            GameScene.showFeedback('Fim de jogo.', true);
+            GameScene.showFeedback('Tente de novo pra ultrapassar seu recorde.', true);
             setTimeout(() => {
                 cc.director.pause();
             }, 30);

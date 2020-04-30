@@ -19,7 +19,7 @@ export default class NewClass extends cc.Component {
     @property(cc.Label) tfNewCupons : cc.Label = null;
 
     update (dt) {
-        this.tfPrevRecord.string = this.minTwoDigits(Main.totalTickets);
+        this.tfPrevRecord.string = this.minTwoDigits(Main.record);
         this.tfCupons.string = this.minTwoDigits(Main.currentTickets);
         this.tfRecord.string = Main.totalTickets <= Main.record ? '--' : this.minTwoDigits(Main.totalTickets);
         this.tfNewCupons.string = this.minTwoDigits(Main.totalTickets - Main.record);
