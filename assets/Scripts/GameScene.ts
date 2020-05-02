@@ -26,6 +26,12 @@ export default class GameScene extends cc.Component {
 
     static isLocked : boolean = false;
 
+    sndTrilha: cc.AudioSource = null;
+    sndJump: cc.AudioSource = null;
+    sndCollide: cc.AudioSource = null;
+    sndWalking: cc.AudioSource = null;    
+    sndFinal: cc.AudioSource = null;
+
     constructor() {
         super();
         GameScene._ref = this;
@@ -51,7 +57,30 @@ export default class GameScene extends cc.Component {
         GameScene._ref.btnReInit.node.opacity = 0;
     }
 
+    public static playJump() {
+        // cc.audioEngine.play(Main._ref.sndCollide, false, .5);
+        // cc.audioEngine.play(Main._ref.sndCollide, true , 1);
+        // cc.audioEngine.play(Main._ref.sndTrilha, true , 0.3);
+        //         cc.audioEngine.playMusic(Main._ref.sndTrilha, true);
+        //         cc.audioEngine.play(Main._ref.sndFinal, true, .5);
+        
+        console.log('pula')
+        GameScene._ref.sndJump.play();
+
+    }
+    onDestroy() {
+        
+    }
     onLoad () {
+        
+        const snds = this.node.getComponents(cc.AudioSource);
+
+        this.sndTrilha = snds[0];
+        this.sndJump = snds[1];
+        this.sndFinal = snds[2];
+        this.sndCollide = snds[3];
+        this.sndWalking = snds[4];
+        
         if (Main.currentPlayer == 'girl') {
             this.boy.opacity = 0;
             this.boy.active = false;            

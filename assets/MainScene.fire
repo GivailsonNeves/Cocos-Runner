@@ -70,18 +70,21 @@
     "_children": [
       {
         "__id__": 3
+      },
+      {
+        "__id__": 4
       }
     ],
     "_active": true,
     "_components": [
       {
-        "__id__": 6
-      },
-      {
         "__id__": 7
       },
       {
         "__id__": 8
+      },
+      {
+        "__id__": 9
       }
     ],
     "_prefab": null,
@@ -134,6 +137,64 @@
   },
   {
     "__type__": "cc.Node",
+    "_name": "New Node",
+    "_objFlags": 0,
+    "_parent": {
+      "__id__": 2
+    },
+    "_children": [],
+    "_active": true,
+    "_components": [],
+    "_prefab": null,
+    "_opacity": 255,
+    "_color": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 255
+    },
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 0,
+      "height": 0
+    },
+    "_anchorPoint": {
+      "__type__": "cc.Vec2",
+      "x": 0.5,
+      "y": 0.5
+    },
+    "_trs": {
+      "__type__": "TypedArray",
+      "ctor": "Float64Array",
+      "array": [
+        -700,
+        -320,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "_eulerAngles": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "_skewX": 0,
+    "_skewY": 0,
+    "_is3DNode": false,
+    "_groupIndex": 0,
+    "groupIndex": 0,
+    "_id": "51yp1jIeVKjJ68JuQJKIhG"
+  },
+  {
+    "__type__": "cc.Node",
     "_name": "Main Camera",
     "_objFlags": 0,
     "_parent": {
@@ -143,10 +204,10 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 4
+        "__id__": 5
       },
       {
-        "__id__": 5
+        "__id__": 6
       }
     ],
     "_prefab": null,
@@ -202,7 +263,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 3
+      "__id__": 4
     },
     "_enabled": true,
     "_cullingMask": 4294967295,
@@ -234,14 +295,22 @@
     "_id": "81GN3uXINKVLeW4+iKSlim"
   },
   {
-    "__type__": "2e2f13as/dAgL8lSOCf8U4G",
+    "__type__": "cc.AudioSource",
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 3
+      "__id__": 4
     },
     "_enabled": true,
-    "_id": "52b6tETI1GYZ1lPRnV+CfH"
+    "_clip": {
+      "__uuid__": "dacd75c8-22c8-4353-a662-fda4f7a69cb3"
+    },
+    "_volume": 1,
+    "_mute": false,
+    "_loop": false,
+    "playOnLoad": true,
+    "preload": true,
+    "_id": "662gTD/qhIzKZPIRCaZHiO"
   },
   {
     "__type__": "cc.Canvas",

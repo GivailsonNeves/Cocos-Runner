@@ -2,13 +2,10 @@ import GameScene from "./GameScene";
 
 const { ccclass, property } = cc._decorator;
 
-cc.loader.loadRes('red_lollipop.png', cc.SpriteFrame);
-cc.loader.loadRes('red_lollipop.png', cc.SpriteFrame);
-cc.loader.loadRes('ticket.png', cc.SpriteFrame);
-
 @ccclass
 export default class Main extends cc.Component {
 
+    private static _ref: Main;
     public static finishied: boolean = false;
     private static crached: boolean = false;
     static totalTickets: number = 0;
@@ -18,12 +15,13 @@ export default class Main extends cc.Component {
     public static colides: number = 0;
     private static ticketsUrl: string;
     private static token: string;
-    public static handlers: any[] = [];
+    public static handlers: any[] = [];    
 
     onLoad() {
+        Main._ref = this;
         Main.ticketsUrl = window['TICKETS_URL'] ? window['TICKETS_URL'] : "https://aniversario-api-hml.azurewebsites.net/api/acao";
         this.getParameters();
-        cc.director.getPhysicsManager().enabled = true;
+        cc.director.getPhysicsManager().enabled = true;        
     }
 
     getParameters() {
@@ -51,8 +49,10 @@ export default class Main extends cc.Component {
         });
     }
 
-    public static init() {
+    public static init() {        
         GameScene.hideFeedback();
+        GameScene._ref.sndTrilha.play();
+        GameScene._ref.sndWalking.play();
         cc.director.resume();
     }
 
@@ -65,13 +65,16 @@ export default class Main extends cc.Component {
 
     public static reInit() {
         if (Main.finishied) {
-            setTimeout(() => {
+            setTimeout(() => {                
                 Main.colides = 0;
                 Main.currentTickets = 0;
-                Main.finishied = false;
+                Main.finishied = false;                
                 Main.record = Main.totalTickets > Main.record ? Main.totalTickets : Main.record;
                 GameScene.hideFeedback();
-                cc.director.loadScene('GameScene');
+                cc.director.loadScene('GameScene', () => {
+                    GameScene._ref.sndTrilha.play();
+                    GameScene._ref.sndWalking.play();
+                });
             }, 30);
         }
     }
@@ -85,12 +88,14 @@ export default class Main extends cc.Component {
         Main.colides++;
         Main.cracheIt();
     }
-
+    
     private static cracheIt() {
+        
         Main.crached = true;
         Main.finishied = Main.colides >= 3;
-        if (Main.finishied) {
-            GameScene.showFeedback('Tente de novo pra ultrapassar seu recorde.', true);
+        GameScene._ref.sndCollide.play();
+        if (Main.finishied) {            
+            Main.finishGame('Tente de novo pra ultrapassar seu recorde.');
             setTimeout(() => {
                 cc.director.pause();
             }, 30);
@@ -99,18 +104,25 @@ export default class Main extends cc.Component {
     }
 
     public static onNewTicket() {
+        GameScene._ref.sndFinal.play();
         Main.currentTickets++;
-        if (Main.currentTickets > Main.totalTickets) {
+        if (Main.currentTickets >= Main.totalTickets) {
             Main.totalTickets = Main.currentTickets;
         }
-        if (Main.totalTickets >= 20) {
+        if (Main.currentTickets >= 20) {
             Main.finishied = true;
-            GameScene.showFeedback('Parabéns! Você pegou todos os cupons.', true);
+            Main.finishGame('Parabéns! Você pegou todos os cupons.');
             Main.registerTickets(this.totalTickets);
             setTimeout(() => {
                 cc.director.pause();
             }, 30);
         }
+    }
+
+    private static finishGame(message) {
+        GameScene.showFeedback(message, true);
+        if (GameScene._ref.sndTrilha)
+            GameScene._ref.sndTrilha.stop();
     }
 
     private getParameterByName(name, url = null): string {

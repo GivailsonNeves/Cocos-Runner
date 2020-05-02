@@ -16,7 +16,13 @@ export default class Obstacle extends cc.Component {
     
     onLoad () {
         cc.director.getPhysicsManager().enabled = true;
-        this.childrens = [this.node.getChildByName('ticket'), this.node.getChildByName('yellow_lollipop'), this.node.getChildByName('red_lollipop')];
+        this.childrens = [
+            this.node.getChildByName('ticket'), 
+            this.node.getChildByName('drink_1'),
+            this.node.getChildByName('drink_2'),
+            this.node.getChildByName('cake'),
+            this.node.getChildByName('yellow_lollipop'),
+            this.node.getChildByName('red_lollipop')];
         this.sortObstacle();
     }
 
@@ -25,14 +31,12 @@ export default class Obstacle extends cc.Component {
             obstacle.opacity = 0;            
         }
         this.node.getComponent(cc.RigidBody).enabledContactListener = true;
-        const index = Math.round(Math.random() * (this.childrens.length));
-        if (index != this.childrens.length) {
-            this.node.opacity = 255;
-            this.childrens[index].opacity = 255;        
-            this.node.name = this.childrens[index].name;
-        } else {
-            this.node.opacity = 0;
-        }
+        let index = Math.round(Math.random() * (this.childrens.length));
+        index = index === this.childrens.length ? 0 : index;
+        this.node.opacity = 255;
+        this.childrens[index].opacity = 255;        
+        this.node.name = this.childrens[index].name;
+        
     }
 
     update (dt) {

@@ -37,6 +37,7 @@ export default class NewClass extends cc.Component {
     jumpPlayer() {
         if (!cc.director.isPaused()) {
             if (this.jump == 0 && !this.alredyFallDown) {
+                GameScene.playJump();
                 this.node.getComponent(cc.Animation).play("jumpping");
                 this.nextPosition = this.node.position.y + 50;
                 this.node.getComponent(cc.RigidBody).applyForceToCenter(new cc.Vec2(0, 100000), true);
@@ -61,6 +62,9 @@ export default class NewClass extends cc.Component {
                         break;
                     case 'yellow_lollipop<PhysicsBoxCollider>':
                     case 'red_lollipop<PhysicsBoxCollider>':
+                    case 'cake<PhysicsBoxCollider>':
+                    case 'drink_1<PhysicsBoxCollider>':
+                    case 'drink_2<PhysicsBoxCollider>':
                         if (other.node.opacity !== 0) {
                             other.node.opacity = 0;
                             Main.onColide();
