@@ -37,4 +37,4 @@ Deve-se passar o endpoint completo para envio de pontuação
 
 ## Game Demo
 
-![Jogo rodando](link-to-image)
+![Jogo rodando](https://github.com/GivailsonNeves/Cocos-Runner/blob/master/running.gif?raw=true)
