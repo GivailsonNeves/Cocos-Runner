@@ -2,6 +2,15 @@
 
 Jogo 2D plataforma desenvolvido em Cocos 2d Com TypeScript baseado na Framework de jogos Cocos 2dx.
 
+## Sumário
+
+- [Requisitos para execução do projeot](#game-demo)
+- [Fluxo do jogo](#fluxo-do-jogo)
+- [Configurações do jogo](#configurações-do-jogo)
+- [Comandos do jogo](#comandos-do-jogo)
+- [Game Demo](##game-demo)
+
+
 ## Requisitos para execução do projeto:
 
 + [Framework Cocos2d-x v.233](https://www.cocos.com/en/cocos2dx)
@@ -35,6 +44,25 @@ Deve-se passar o endpoint completo para envio de pontuação
 </script>
 ```
 
+## Comandos do jogo
+
+Uma vez que o jogo iniciou os comandos para saltar são:
+- Touch no celular
+- Click esquerdo do mouse
+- Barra de espaço
+- Seta para cima
+
 ## Game Demo
 
 ![Jogo rodando](https://github.com/GivailsonNeves/Cocos-Runner/blob/master/running.gif?raw=true)
+
+
+## Sumário
+
+- [Requisitos para execução do projeot](#game-demo)
+- [Fluxo do jogo](#fluxo-do-jogo)
+- [Configurações do jogo](#configurações-do-jogo)
+- [Comandos do jogo](#comandos-do-jogo)
+- [Game Demo](##game-demo)
+
+>Proibida a copia integral do código, ao menos os assets devem ser mudados.
