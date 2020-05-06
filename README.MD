@@ -8,7 +8,7 @@ Jogo 2D plataforma desenvolvido em Cocos 2d Com TypeScript baseado na Framework 
 - [Fluxo do jogo](#fluxo-do-jogo)
 - [Configurações do jogo](#configurações-do-jogo)
 - [Comandos do jogo](#comandos-do-jogo)
-- [Game Demo](##game-demo)
+- [Game Demo](#game-demo)
 
 
 ## Requisitos para execução do projeto:
@@ -63,6 +63,6 @@ Uma vez que o jogo iniciou os comandos para saltar são:
 - [Fluxo do jogo](#fluxo-do-jogo)
 - [Configurações do jogo](#configurações-do-jogo)
 - [Comandos do jogo](#comandos-do-jogo)
-- [Game Demo](##game-demo)
+- [Game Demo](#game-demo)
 
 >Proibida a copia integral do código, ao menos os assets devem ser mudados.
