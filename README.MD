@@ -34,3 +34,7 @@ Deve-se passar o endpoint completo para envio de pontuação
   window.TICKETS_URL = "http://www.google.com.br"
 </script>
 ```
+
+## Game Demo
+
+![Jogo rodando](link-to-image)
