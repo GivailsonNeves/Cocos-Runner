@@ -1,6 +1,6 @@
 # Runner Jogo Plataforma
 
-Jogo 2D plataforma desenvolvido em Cocos 2d Com TypeScript baseado na Framework de jogos Cocos 2dx.
+Jogo desenvolvido em Cocos2d-x e TypeScript utilizando na Cocos Creator.
 
 ## Sumário
 
